@@ -3,8 +3,10 @@ kind: Component
 metadata:
   name: orderpubsub
 spec:
-  type: pubsub.azure.servicebus
+  type: pubsub.redis
   version: v1
   metadata:
-  - name: connectionString # Required when not using Azure Authentication.
-    value: "Endpoint=sb://daprdemosb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=qQSGs7dp5c8p1wiYiQAsmK+kKYM/x9xZnGmCc0JPgMk="
+  - name: redisHost
+    value: localhost:6379
+  - name: redisPassword
+    value: ""
