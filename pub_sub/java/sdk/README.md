@@ -92,3 +92,22 @@ dapr run --app-id checkout-sdk --components-path ../../../components -- java -ja
 dapr stop --app-id checkout-sdk
 dapr stop --app-id order-processor-sdk
 ```
+## Phil & Dave's Excellent Adventures
+1. Create Service Bus, Create 'orders' topic
+1. Create Azure container registry
+1. Use Jib to create docker image from spring boot apps.
+`mvn compile com.google.cloud.tools:jib-maven-plugin:3.3.1:dockerBuild -Dimage=philanddave.azurecr.io/checkout:latest`
+1. push to ACR
+`docker push philanddave.azurecr.io/checkout:latest`
+1. Follow this guide to create container app environment, create dapr component, create containerapps. [https://learn.microsoft.com/en-us/azure/container-apps/microservices-dapr?tabs=bash](https://learn.microsoft.com/en-us/azure/container-apps/microservices-dapr?tabs=bash)
+1. Command to create container environment:
+`az containerapp env create -n phildemo -g rg-dapr-demo --location centralus`
+1. Command to create dapr component:
+`az containerapp env dapr-component set -n phildemo -g rg-dapr-demo --dapr-component-name orderpubsub --yaml .\pubsubservicebus.yaml`
+1. Command to create 'order-processor':
+`az containerapp create --name order-processor -g rg-dapr-demo --environment phildemo --image philanddave.azurecr.io/order-processor:latest --target-port 8080 --ingress 'internal' --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor --dapr-app-port 8080 --env-vars 'APP_PORT=8080' --registry-username philanddave --registry-password <password here> --registry-server philanddave.azurecr.io`
+1. Command to create 'checkout': 
+`az containerapp create --name checkout -g rg-dapr-demo --environment phildemo --image philanddave.azurecr.io/checkout:latest --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id checkout --registry-server philanddave.azurecr.io --registry-username philanddave --registry-password <password_here>`
+
+## Resources Links
+[https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps](https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps)

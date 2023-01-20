@@ -1,0 +1,8 @@
+componentType: pubsub.azure.servicebus
+version: v1
+metadata:
+  - name: connectionString
+    value: "Endpoint=sb://daprdemosb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=qQSGs7dp5c8p1wiYiQAsmK+kKYM/x9xZnGmCc0JPgMk="
+scopes:
+  - order-processor
+  - checkout
