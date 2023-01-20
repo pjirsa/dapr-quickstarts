@@ -105,7 +105,7 @@ dapr stop --app-id order-processor-sdk
 1. Command to create dapr component:
 `az containerapp env dapr-component set -n phildemo -g rg-dapr-demo --dapr-component-name orderpubsub --yaml .\pubsubservicebus.yaml`
 1. Command to create 'order-processor':
-`az containerapp create --name order-processor -g rg-dapr-demo --environment phildemo --image philanddave.azurecr.io/order-processor:latest --target-port 8080 --ingress 'internal' --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor --dapr-app-port 8080 --env-vars 'APP_PORT=8080' --registry-server philanddave.azurecr.io`
+`az containerapp create --name order-processor -g rg-dapr-demo --environment phildemo2 --image philanddave.azurecr.io/order-processor:latest --target-port 8080 --ingress 'internal' --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor --dapr-app-port 8080 --env-vars 'APP_PORT=8080' --registry-server philanddave.azurecr.io --user-assigned /subscriptions/1c642d88-5042-4d19-9d49-49be6612a40f/resourcegroups/rg-dapr-demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dapr-demo-identity`
 1. Command to create 'checkout': 
 `az containerapp create --name checkout -g rg-dapr-demo --environment phildemo --image philanddave.azurecr.io/checkout:latest --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id checkout --registry-server philanddave.azurecr.io`
 

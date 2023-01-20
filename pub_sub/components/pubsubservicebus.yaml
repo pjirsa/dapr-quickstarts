@@ -1,8 +1,12 @@
 componentType: pubsub.azure.servicebus
 version: v1
 metadata:
-  - name: connectionString
-    value: ""
+  - name: namespaceName
+    # Required when using Azure Authentication.
+    # Must be a fully-qualified domain name
+    value: "daprdemosb.servicebus.windows.net"
+  - name: azureClientId
+    value: "b84d4714-bd1d-4583-b49c-721612922e39"
 scopes:
   - order-processor
   - checkout
