@@ -110,4 +110,5 @@ dapr stop --app-id order-processor-sdk
 `az containerapp create --name checkout -g rg-dapr-demo --environment phildemo2 --image philanddave.azurecr.io/checkout:latest --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id checkout --registry-server philanddave.azurecr.io --user-assigned /subscriptions/1c642d88-5042-4d19-9d49-49be6612a40f/resourcegroups/rg-dapr-demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dapr-demo-identity`
 
 ## Resources Links
-[https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps](https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps)
+[Migrate Spring Boot App to Container Apps](https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-spring-boot-to-azure-container-apps)
+[Container Apps Dapr Services](https://learn.microsoft.com/en-us/azure/container-apps/microservices-dapr?tabs=bash)
